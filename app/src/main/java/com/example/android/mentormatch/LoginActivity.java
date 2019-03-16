@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
@@ -23,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView needNewAccountLink;
     private FirebaseAuth mAuth;
     String email, password;
+    private TextView forgetPasswordLink;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +76,11 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+        loginButton = findViewById(R.id.sign_in_button);
+        userEmail = findViewById(R.id.sign_in_email);
+        userPassword = findViewById(R.id.sign_in_password);
+        needNewAccountLink = findViewById(R.id.need_new_account);
+        forgetPasswordLink = findViewById(R.id.forget_password_link);
     }
     private void sendUserToMainActivity() {
         Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
