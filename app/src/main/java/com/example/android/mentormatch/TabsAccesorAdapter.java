@@ -1,11 +1,11 @@
 package com.example.android.mentormatch;
 
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabsAccesorAdapter extends FragmentPagerAdapter {
+
     public TabsAccesorAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -15,9 +15,14 @@ public class TabsAccesorAdapter extends FragmentPagerAdapter {
         switch (i)
         {
             case 0:
-
+                return new MyProfile();
+            case 1:
+                return new Match();
+            case 2:
+                return new Chat();
+            default:
+                return null;
         }
-        return null;
     }
 
     @Override
@@ -25,7 +30,6 @@ public class TabsAccesorAdapter extends FragmentPagerAdapter {
         return 3;
     }
 
-    @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position)
@@ -33,7 +37,7 @@ public class TabsAccesorAdapter extends FragmentPagerAdapter {
             case 0:
                 return "My Profile";
             case 1:
-                return "Swipe";
+                return "Match";
             case 2:
                 return "Chat";
             default:
