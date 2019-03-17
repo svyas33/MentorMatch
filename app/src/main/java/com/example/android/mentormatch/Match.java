@@ -1,5 +1,6 @@
 package com.example.android.mentormatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -87,6 +88,8 @@ public class Match extends Fragment {
         flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
+                Intent intent = new Intent(getActivity(), BioPopUpActivity.class);
+                startActivity(intent);
             }
         });
         return rootView;
