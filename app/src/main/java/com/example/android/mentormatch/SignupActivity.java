@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.measurement.module.Analytics;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,6 +30,7 @@ public class SignupActivity extends AppCompatActivity {
     private DatabaseReference postsRef;
 
     private FirebaseAuth mAuth;
+    DatabaseReference ref;
     String email, password, name, major,bio,year;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,21 +67,16 @@ public class SignupActivity extends AppCompatActivity {
                 ProfileData profileData = new ProfileData(email, name,major,year,bio);
                 int id = mRadioGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) findViewById(id);
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                if(radioButton.getText().equals("Mentee")){
-                    cUser = new Mentee(profileData);
-                    postsRef = ref.child("mentees");
-                }else{
-                    cUser = new Mentor(profileData);
-                    postsRef = ref.child("mentors");
-                }
-                createUser(email, password);
+                ref = FirebaseDatabase.getInstance().getReference();
+                cUser = new User(null,profileData,radioButton.getText().toString());
+                postsRef = ref.child(cUser.getStatus());
+                createUser(email, password, cUser);
             }
         });
 
     }
 
-    private void createUser(String email, String password){
+    private void createUser(String email, String password, final User cUser){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -87,7 +84,10 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             //Log.d(TAG, "createUserWithEmail:success");
+
                             FirebaseUser user = mAuth.getCurrentUser();
+                            cUser.setUserID(user.getUid());
+                            postsRef.child(user.getUid()).put();
                             //updateUI(user);
                             sendUserToMainActivity();
                         } else {

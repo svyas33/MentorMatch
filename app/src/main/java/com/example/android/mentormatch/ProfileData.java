@@ -1,19 +1,13 @@
 package com.example.android.mentormatch;
 
 public class ProfileData {
-    private String name, major, year, bio,email;
+    private String name, major, year, bio;
     public ProfileData(String email, String name,String major, String year, String bio){
         this. major = major;
         this.name = name;
         this.year = year;
         this.bio = bio;
-        this.email = email;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
     public String getBio() {
         return bio;
     }
