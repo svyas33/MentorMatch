@@ -19,7 +19,7 @@ public class TabsAccesorAdapter extends FragmentPagerAdapter {
             case 1:
                 return new Match();
             case 2:
-                return new Chat();
+                return new MyMatchesFragment();
             default:
                 return null;
         }

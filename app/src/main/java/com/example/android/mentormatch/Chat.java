@@ -33,14 +33,13 @@ public class Chat extends Fragment {
         FloatingActionButton fab =
                 (FloatingActionButton)rootview.findViewById(R.id.fab);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference postsRef = ref.child("posts");
+        final DatabaseReference postsRef = ref.child("chats");
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText input = (EditText)rootview.findViewById(R.id.chat_input);
-                        postsRef.push().setValue(new ChatMessage(input.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getDisplayName())
-                        );
+                        postsRef.push().setValue(new ChatMessage(input.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getDisplayName()));
                 input.setText("");
             }
         });

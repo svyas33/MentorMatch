@@ -11,16 +11,16 @@ android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 tools:context=".Chat">
 
-<android.support.design.widget.FloatingActionButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:src="@drawable/send_foreground"
-    android:id="@+id/fab"
-    android:tint="@android:color/white"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentEnd="true"
-    app:fabSize="mini" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:src="@mipmap/send_icon_round"
+        android:tint="@color/common_google_signin_btn_text_dark_disabled"
+        app:fabSize="mini" />
 
 <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
