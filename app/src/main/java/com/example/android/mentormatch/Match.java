@@ -46,6 +46,8 @@ public class Match extends Fragment {
         // Inflate the layout for this fragment
         final View rootView =  inflater.inflate(R.layout.fragment_match, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+
         checkUserStatus();
 
         al = new ArrayList<>();
