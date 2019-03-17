@@ -6,8 +6,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabsAccesorAdapter extends FragmentPagerAdapter {
 
+    MyProfile myProfile;
+    Chat chat;
+    Match match;
+
     public TabsAccesorAdapter(FragmentManager fm) {
         super(fm);
+        myProfile = new MyProfile();
+        chat = new Chat();
+        match = new Match();
     }
 
     @Override
@@ -15,11 +22,11 @@ public class TabsAccesorAdapter extends FragmentPagerAdapter {
         switch (i)
         {
             case 0:
-                return new MyProfile();
+                return myProfile;
             case 1:
-                return new Match();
+                return match;
             case 2:
-                return new MyMatchesFragment();
+                return chat;
             default:
                 return null;
         }

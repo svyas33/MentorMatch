@@ -11,51 +11,50 @@
     <ImageView
         android:layout_width="100sp"
         android:layout_height="100sp"
-        android:id="@+id/my_profile_image"
+        android:id="@+id/bio_image"
         android:src="@mipmap/ic_launcher"
         android:layout_marginBottom="20sp" />
 
     <EditText
-        android:id="@+id/my_profile_name"
+        android:id="@+id/bio_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20sp"
         android:background="@null"
-        android:hint="Name" />
+        android:hint="Name"
+        android:text="Shivani Vyas"/>
 
     <EditText
-        android:id="@+id/my_profile_major"
+        android:id="@+id/bio_major"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20sp"
         android:background="@null"
-        android:hint="Major" />
+        android:hint="Major"
+        android:text="Biomedical Engineering" />
 
     <EditText
-        android:id="@+id/my_profile_year"
+        android:id="@+id/bio_year"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20sp"
         android:background="@null"
-        android:hint="Year" />
+        android:hint="Year"
+        android:text="2021"/>
 
     <EditText
-        android:id="@+id/my_profile_bio"
+        android:id="@+id/bio_bio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20sp"
         android:background="@null"
-        android:hint="Bio" />
+        android:hint="Bio"
+        android:text="I am a mentor!"/>
 
     <Button
+        android:id="@+id/bio_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/my_profile_confirm"
-        android:text="confirm"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/my_profile_signout"
-        android:text="sign out"/>
+        android:text="Back" />
 
 </LinearLayout>

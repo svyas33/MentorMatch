@@ -27,7 +27,6 @@ public class SignupActivity extends AppCompatActivity {
     private EditText userEmail, userPassword,userName, userMajor, userYear, userBio;
     private TextView alreadyHaveAccountLink;
     private RadioGroup mRadioGroup;
-    private User cUser;
     private DatabaseReference postsRef;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
 
@@ -109,6 +108,7 @@ public class SignupActivity extends AppCompatActivity {
                             userInfo.put("bio", bio);
                             userInfo.put("year", year);
                             userInfo.put("major", major);
+                            userInfo.put("profileImageUrl", "default");
                             currentUserDb.updateChildren(userInfo);;
                             //updateUI(user);
                             sendUserToMainActivity();
