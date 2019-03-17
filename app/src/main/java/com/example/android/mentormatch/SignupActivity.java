@@ -12,7 +12,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.measurement.module.Analytics;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -67,6 +66,7 @@ public class SignupActivity extends AppCompatActivity {
                 ProfileData profileData = new ProfileData(email, name,major,year,bio);
                 int id = mRadioGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) findViewById(id);
+
                 ref = FirebaseDatabase.getInstance().getReference();
                 cUser = new User(null,profileData,radioButton.getText().toString());
                 postsRef = ref.child(cUser.getStatus());
@@ -87,7 +87,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             cUser.setUserID(user.getUid());
-                            postsRef.child(user.getUid()).put();
+                            //postsRef.child(user.getUid()).put();
                             //updateUI(user);
                             sendUserToMainActivity();
                         } else {
