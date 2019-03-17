@@ -102,9 +102,8 @@ public class SignupActivity extends AppCompatActivity {
 
                             String userId = mAuth.getCurrentUser().getUid();
                             DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("User").child(radioButton.getText().toString()).child(userId);
-                            Map userInfo = new HashMap<>();
+                            Map<String, Object> userInfo = new HashMap<>();
                             userInfo.put("name", name);
-                            //userInfo.put("status", radioButton.getText().toString());
                             userInfo.put("bio", bio);
                             userInfo.put("year", year);
                             userInfo.put("major", major);

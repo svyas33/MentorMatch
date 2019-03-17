@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.main_tabs_pager);
         myTabsAccesorAdapter = new TabsAccesorAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(myTabsAccesorAdapter);
-
+        userNull();
         mTabLayout = findViewById(R.id.main_tabs);
         mTabLayout.setupWithViewPager(mViewPager); }
     private void sendUserToLogInActivity() {
