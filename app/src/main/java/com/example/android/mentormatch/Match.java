@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
@@ -22,7 +21,7 @@ public class Match extends Fragment {
 
 
     private ArrayList<String> al;
-    private ArrayAdapter<String> arrayAdapter;
+    private ArrayAdapter arrayAdapter;
     private int i;
 
     public Match() {
@@ -46,7 +45,7 @@ public class Match extends Fragment {
         al.add("css");
         al.add("javascript");
 
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
+        arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.item, R.id.helloText, al);
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) rootView.findViewById(R.id.frame);
 
@@ -97,6 +96,6 @@ public class Match extends Fragment {
         });
 
         return rootView;
-    }\
+    }
 
 }
