@@ -101,7 +101,7 @@ public class SignupActivity extends AppCompatActivity {
                             //Log.d(TAG, "createUserWithEmail:success");
 
                             String userId = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("User").child(radioButton.getText().toString());
+                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("User").child(radioButton.getText().toString()).child(userId);
                             Map userInfo = new HashMap<>();
                             userInfo.put("name", name);
                             //userInfo.put("status", radioButton.getText().toString());
