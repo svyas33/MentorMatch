@@ -87,7 +87,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             cUser.setUserID(user.getUid());
-                            postsRef.child(user.getUid()).put();
+                            postsRef.child(user.getUid()).push();
                             //updateUI(user);
                             sendUserToMainActivity();
                         } else {

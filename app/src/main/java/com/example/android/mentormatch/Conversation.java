@@ -5,11 +5,11 @@ import android.content.Context;
 import java.util.ArrayList;
 
 public class Conversation {
-    private Mentee mentee;
-    private Mentor mentor;
+    private User mentee;
+    private User mentor;
     private ArrayList<ChatMessage> messages;
 
-    public Conversation(Mentor mentor, Mentee mentee){
+    public Conversation(User mentor, User mentee){
         this.mentee = mentee;
         this.mentor = mentor;
         messages = new ArrayList<>();
