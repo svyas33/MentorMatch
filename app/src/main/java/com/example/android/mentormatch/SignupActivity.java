@@ -34,7 +34,7 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private  RadioButton radioButton;
     DatabaseReference ref;
-    String email, password, name, major,bio,year;
+    String email, password, name, major,bio,year,status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +84,7 @@ public class SignupActivity extends AppCompatActivity {
                 if(radioButton.getText()==null){
                     return;
                 }
+                status = radioButton.getText().toString();
                 ref = FirebaseDatabase.getInstance().getReference();
                 createUser();
             }
@@ -104,6 +105,7 @@ public class SignupActivity extends AppCompatActivity {
                             DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("User").child(radioButton.getText().toString()).child(userId);
                             Map<String, Object> userInfo = new HashMap<>();
                             userInfo.put("name", name);
+                            userInfo.put("status", status);
                             userInfo.put("bio", bio);
                             userInfo.put("year", year);
                             userInfo.put("major", major);
