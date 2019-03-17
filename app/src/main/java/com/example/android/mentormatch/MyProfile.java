@@ -23,7 +23,9 @@ public class MyProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_profile, container, false);
+        final View rootview = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        return rootview;
     }
 
 }
