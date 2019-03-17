@@ -13,8 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 
 /**
@@ -29,31 +32,27 @@ public class Chat extends Fragment {
         final View rootview = inflater.inflate(R.layout.fragment_chat, container, false);
         FloatingActionButton fab =
                 (FloatingActionButton)rootview.findViewById(R.id.fab);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference postsRef = ref.child("posts");
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText input = (EditText)rootview.findViewById(R.id.chat_input);
-
-                // Read the input field and push a new instance
-                // of ChatMessage to the Firebase database
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .push()
-                        .setValue(new ChatMessage(input.getText().toString(),
-                                FirebaseAuth.getInstance()
-                                        .getCurrentUser()
-                                        .getDisplayName())
+                        postsRef.push().setValue(new ChatMessage(input.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getDisplayName())
                         );
-
-                // Clear the input
                 input.setText("");
             }
         });
         ListView listOfMessages = (ListView)rootview.findViewById(R.id.list_of_messages);
+        Query query = FirebaseDatabase.getInstance().getReference().child("chats");
 
-        adapter = new FirebaseListAdapter<ChatMessage>(this.getActivity(), ChatMessage.class,
-                R.layout.messages, FirebaseDatabase.getInstance().getReference()) {
+        FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
+                .setQuery(query, ChatMessage.class)
+                .setLayout(R.layout.messages)
+                .build();
+
+        adapter = new FirebaseListAdapter<ChatMessage>(options) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
                 // Get references to the views of message.xml
@@ -73,5 +72,14 @@ public class Chat extends Fragment {
         listOfMessages.setAdapter(adapter);
         return  rootview;
     }
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
 }
