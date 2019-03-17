@@ -28,18 +28,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        loginButton = findViewById(R.id.sign_in_button);
         userEmail = findViewById(R.id.sign_in_email);
         userPassword = findViewById(R.id.sign_in_password);
         needNewAccountLink = findViewById(R.id.need_new_account);
+        forgetPasswordLink = findViewById(R.id.forget_password_link);
         needNewAccountLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendUserToSignUpActivity();
             }
         });
-
-
         mAuth = FirebaseAuth.getInstance();
         loginButton = findViewById(R.id.sign_in_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = userEmail.getText().toString();
                 password = userPassword.getText().toString();
-
                 signIn(email, password);
             }
         });
@@ -76,11 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
-        loginButton = findViewById(R.id.sign_in_button);
-        userEmail = findViewById(R.id.sign_in_email);
-        userPassword = findViewById(R.id.sign_in_password);
-        needNewAccountLink = findViewById(R.id.need_new_account);
-        forgetPasswordLink = findViewById(R.id.forget_password_link);
+
     }
     private void sendUserToMainActivity() {
         Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);

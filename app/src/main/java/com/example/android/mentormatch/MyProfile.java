@@ -38,24 +38,32 @@ public class MyProfile extends Fragment {
         displayYear = rootview.findViewById(R.id.my_profile_year);
         displayMajor = rootview.findViewById(R.id.my_profile_major);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String userId = mAuth.getCurrentUser().getUid();
-
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child(userId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ProfileData profileData = dataSnapshot.getValue(ProfileData.class);
-                displayBio.setText(profileData.getBio());
-                displayName.setText(profileData.getName());
-                displayMajor.setText(profileData.getMajor());
-                displayYear.setText(profileData.getYear());
-            }
+        if(mAuth.getCurrentUser()!=null){
+            String userId = mAuth.getCurrentUser().getUid();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+            ref.child("User").child(userId).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if(user !=null){
+                        ProfileData profileData = user.getData();
+                        displayBio.setText(profileData.getBio());
+                        displayName.setText(profileData.getName());
+                        displayMajor.setText(profileData.getMajor());
+                        displayYear.setText(profileData.getYear());
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
         return rootview;
     }
 
