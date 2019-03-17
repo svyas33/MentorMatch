@@ -42,7 +42,7 @@ public class MyProfile extends Fragment {
         displayName = rootview.findViewById(R.id.my_profile_name);
         displayYear = rootview.findViewById(R.id.my_profile_year);
         displayMajor = rootview.findViewById(R.id.my_profile_major);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         if(mAuth.getCurrentUser()!=null){
             String userId = mAuth.getCurrentUser().getUid();
