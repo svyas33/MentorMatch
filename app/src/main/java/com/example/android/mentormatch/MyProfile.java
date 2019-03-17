@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class MyProfile extends Fragment {
     EditText displayName, displayYear, displayMajor, displayBio;
+    Button signOutButton;
 
     private FirebaseAuth mAuth;
 
@@ -36,7 +37,7 @@ public class MyProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootview = inflater.inflate(R.layout.fragment_chat, container, false);
+        final View rootview = inflater.inflate(R.layout.fragment_my_profile, container, false);
         displayBio = rootview.findViewById(R.id.my_profile_bio);
         displayName = rootview.findViewById(R.id.my_profile_name);
         displayYear = rootview.findViewById(R.id.my_profile_year);
@@ -68,7 +69,7 @@ public class MyProfile extends Fragment {
             });
         }
 
-        Button signOutButton = rootview.findViewById(R.id.signout);
+        signOutButton = (Button)rootview.findViewById(R.id.my_profile_signout);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

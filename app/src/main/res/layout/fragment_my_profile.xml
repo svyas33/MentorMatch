@@ -50,12 +50,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/confirm"
+        android:id="@+id/my_profile_confirm"
         android:text="confirm"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/signout"
+        android:id="@+id/my_profile_signout"
         android:text="sign out"/>
 
 </LinearLayout>
