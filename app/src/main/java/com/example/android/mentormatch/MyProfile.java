@@ -105,6 +105,9 @@ public class MyProfile extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map userInfo = ( Map<String, Object>) dataSnapshot.getValue();
+                if(userInfo ==null){
+                    return;
+                }
                 if(userInfo.get("name")!=null){
                     name = userInfo.get("name").toString();
                     displayName.setText(name);
