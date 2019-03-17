@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
     private Button createAccountButton;
@@ -27,15 +29,29 @@ public class SignupActivity extends AppCompatActivity {
     private RadioGroup mRadioGroup;
     private User cUser;
     private DatabaseReference postsRef;
+    private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
 
     private FirebaseAuth mAuth;
+    private  RadioButton radioButton;
     DatabaseReference ref;
     String email, password, name, major,bio,year;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        mAuth = FirebaseAuth.getInstance();
+        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user !=null){
+                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
+            }
+        };
         userEmail = findViewById(R.id.sign_up_email);
         userPassword = findViewById(R.id.sign_up_password);
         userName = findViewById(R.id.sign_up_name);
@@ -63,20 +79,19 @@ public class SignupActivity extends AppCompatActivity {
                 major = userMajor.getText().toString();
                 year = userYear.getText().toString();
                 bio = userBio.getText().toString();
-                ProfileData profileData = new ProfileData(email, name,major,year,bio);
-                int id = mRadioGroup.getCheckedRadioButtonId();
-                RadioButton radioButton = (RadioButton) findViewById(id);
-
+                int radioId = mRadioGroup.getCheckedRadioButtonId();
+                radioButton = (RadioButton) findViewById(radioId);
+                if(radioButton.getText()==null){
+                    return;
+                }
                 ref = FirebaseDatabase.getInstance().getReference();
-                cUser = new User(null,profileData,radioButton.getText().toString());
-                postsRef = ref.child(cUser.getStatus());
-                createUser(email, password, cUser);
+                createUser();
             }
         });
 
     }
 
-    private void createUser(String email, String password, final User cUser){
+    private void createUser(){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -85,9 +100,15 @@ public class SignupActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             //Log.d(TAG, "createUserWithEmail:success");
 
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            cUser.setUserID(user.getUid());
-                            postsRef.child(user.getUid()).push();
+                            String userId = mAuth.getCurrentUser().getUid();
+                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(radioButton.getText().toString());
+                            Map userInfo = new HashMap<>();
+                            userInfo.put("name", name);
+                            //userInfo.put("status", radioButton.getText().toString());
+                            userInfo.put("bio", bio);
+                            userInfo.put("year", year);
+                            userInfo.put("major", major);
+                            currentUserDb.updateChildren(userInfo);;
                             //updateUI(user);
                             sendUserToMainActivity();
                         } else {
